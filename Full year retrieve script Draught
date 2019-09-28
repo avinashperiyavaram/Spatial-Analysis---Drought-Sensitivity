@@ -1,0 +1,491 @@
+//add region from other code
+
+// Openning the equired Data Set
+
+//Yearly
+var pdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-01-01', '2002-01-01')); //Filter dates here
+var pdsi = pdsidata.select('pdsi');
+
+//Jan
+var janpdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-01-01', '2001-02-01')); //Filter dates here
+var janpdsi = janpdsidata.select('pdsi');
+
+//Feb
+var febpdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-02-01', '2001-03-01')); //Filter dates here
+var febpdsi = febpdsidata.select('pdsi');
+
+//Mar
+var marpdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-03-01', '2001-04-01')); //Filter dates here
+var marpdsi = marpdsidata.select('pdsi');
+
+//Apr
+var aprpdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-04-01', '2001-05-01')); //Filter dates here
+var aprpdsi = aprpdsidata.select('pdsi');
+
+//May
+var maypdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-05-01', '2001-06-01')); //Filter dates here
+var maypdsi = maypdsidata.select('pdsi');
+
+//Jun
+var junpdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-06-01', '2001-07-01')); //Filter dates here
+var junpdsi = junpdsidata.select('pdsi');
+
+//Jul
+var julpdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-07-01', '2001-08-01')); //Filter dates here
+var julpdsi = julpdsidata.select('pdsi');
+
+//Aug
+var augpdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-08-01', '2001-09-01')); //Filter dates here
+var augpdsi = augpdsidata.select('pdsi');
+
+//Sep
+var seppdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-09-01', '2001-10-01')); //Filter dates here
+var seppdsi = seppdsidata.select('pdsi');
+
+//Oct
+var octpdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-10-01', '2001-11-01')); //Filter dates here
+var octpdsi = octpdsidata.select('pdsi');
+
+//Nov
+var novpdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-11-01', '2002-12-01')); //Filter dates here
+var novpdsi = novpdsidata.select('pdsi');
+
+//Dec
+var decpdsidata = ee.ImageCollection('IDAHO_EPSCOR/PDSI')
+                  .filter(ee.Filter.date('2001-12-01', '2002-01-01')); //Filter dates here
+var decpdsi = decpdsidata.select('pdsi');
+
+
+// Seperting the levels by colour
+var pdsiVis = {
+  min: -5.0,
+  max: 10.0,
+  palette: ['red', 'yellow', 'green', 'cyan', 'blue'],
+};
+
+// Seting up raster layers
+
+Map.addLayer(pdsi, pdsiVis, 'PDSI');
+
+
+
+// Reducing to mean and std dev and minmax
+
+//Yearly
+var minmax = pdsidata.reduce(ee.Reducer.minMax());
+var mean = pdsidata.reduce(ee.Reducer.mean());
+var stddev = pdsidata.reduce(ee.Reducer.stdDev());
+
+//Jan
+var janminmax = janpdsidata.reduce(ee.Reducer.minMax());
+var janmean = janpdsidata.reduce(ee.Reducer.mean());
+var janstddev = janpdsidata.reduce(ee.Reducer.stdDev());
+
+//Feb
+var febminmax = febpdsidata.reduce(ee.Reducer.minMax());
+var febmean = febpdsidata.reduce(ee.Reducer.mean());
+var febstddev = febpdsidata.reduce(ee.Reducer.stdDev());
+
+//Mar
+var marminmax = marpdsidata.reduce(ee.Reducer.minMax());
+var marmean = marpdsidata.reduce(ee.Reducer.mean());
+var marstddev = marpdsidata.reduce(ee.Reducer.stdDev());
+
+//Apr
+var aprminmax = aprpdsidata.reduce(ee.Reducer.minMax());
+var aprmean = aprpdsidata.reduce(ee.Reducer.mean());
+var aprstddev = aprpdsidata.reduce(ee.Reducer.stdDev());
+
+//May
+var mayminmax = maypdsidata.reduce(ee.Reducer.minMax());
+var maymean = maypdsidata.reduce(ee.Reducer.mean());
+var maystddev = maypdsidata.reduce(ee.Reducer.stdDev());
+
+//Jun
+var junminmax = junpdsidata.reduce(ee.Reducer.minMax());
+var junmean = junpdsidata.reduce(ee.Reducer.mean());
+var junstddev = junpdsidata.reduce(ee.Reducer.stdDev());
+
+//Jul
+var julminmax = julpdsidata.reduce(ee.Reducer.minMax());
+var julmean = julpdsidata.reduce(ee.Reducer.mean());
+var julstddev = julpdsidata.reduce(ee.Reducer.stdDev());
+
+//Aug
+var augminmax = augpdsidata.reduce(ee.Reducer.minMax());
+var augmean = augpdsidata.reduce(ee.Reducer.mean());
+var augstddev = augpdsidata.reduce(ee.Reducer.stdDev());
+
+//Sep
+var sepminmax = seppdsidata.reduce(ee.Reducer.minMax());
+var sepmean = seppdsidata.reduce(ee.Reducer.mean());
+var sepstddev = seppdsidata.reduce(ee.Reducer.stdDev());
+
+//Oct
+var octminmax = octpdsidata.reduce(ee.Reducer.minMax());
+var octmean = octpdsidata.reduce(ee.Reducer.mean());
+var octstddev = octpdsidata.reduce(ee.Reducer.stdDev());
+
+//Nov
+var novminmax = novpdsidata.reduce(ee.Reducer.minMax());
+var novmean = novpdsidata.reduce(ee.Reducer.mean());
+var novstddev = novpdsidata.reduce(ee.Reducer.stdDev());
+
+//Dec
+var decminmax = decpdsidata.reduce(ee.Reducer.minMax());
+var decmean = decpdsidata.reduce(ee.Reducer.mean());
+var decstddev = decpdsidata.reduce(ee.Reducer.stdDev());
+
+// Transfaring Images to Drive
+
+// Yearly
+Export.image.toDrive({
+  image: mean,
+  description: '2001mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: 'yearly',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: stddev,
+  description: '2001stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: 'yearly',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: minmax,
+  description: '2001minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: 'yearly',
+  scale: 4000,
+});
+
+//Jan
+Export.image.toDrive({
+  image: janmean,
+  description: 'jan01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: janstddev,
+  description: 'jan01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: janminmax,
+  description: 'jan01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//Feb
+Export.image.toDrive({
+  image: febmean,
+  description: 'feb01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: febstddev,
+  description: 'feb01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: febminmax,
+  description: 'feb01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//Mar
+Export.image.toDrive({
+  image: marmean,
+  description: 'mar01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: marstddev,
+  description: 'mar01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: marminmax,
+  description: 'mar01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//Apr
+Export.image.toDrive({
+  image: aprmean,
+  description: 'apr01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: aprstddev,
+  description: 'apr01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: aprminmax,
+  description: 'apr01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//May
+Export.image.toDrive({
+  image: maymean,
+  description: 'may01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: maystddev,
+  description: 'may01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: mayminmax,
+  description: 'may01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//jun
+Export.image.toDrive({
+  image: junmean,
+  description: 'jun01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: junstddev,
+  description: 'jun01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: junminmax,
+  description: 'jun01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//jul
+Export.image.toDrive({
+  image: julmean,
+  description: 'jul01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: julstddev,
+  description: 'jul01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: julminmax,
+  description: 'jul01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//Aug
+Export.image.toDrive({
+  image: augmean,
+  description: 'aug01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: augstddev,
+  description: 'aug01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: augminmax,
+  description: 'aug01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//Sep
+Export.image.toDrive({
+  image: sepmean,
+  description: 'sep01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: sepstddev,
+  description: 'sep01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: sepminmax,
+  description: 'sep01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//Oct
+Export.image.toDrive({
+  image: octmean,
+  description: 'oct01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: octstddev,
+  description: 'oct01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: octminmax,
+  description: 'oct01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//Nov
+Export.image.toDrive({
+  image: novmean,
+  description: 'nov01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: novstddev,
+  description: 'nov01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: novminmax,
+  description: 'nov01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//Dec
+Export.image.toDrive({
+  image: decmean,
+  description: 'dec01mean',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: decstddev,
+  description: 'dec01stddev',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+Export.image.toDrive({
+  image: decminmax,
+  description: 'dec01minmax',
+  region: contusreg,
+  fileFormat: 'GeoTIFF',
+  folder: '2001',
+  scale: 4000,
+});
+
+//End
